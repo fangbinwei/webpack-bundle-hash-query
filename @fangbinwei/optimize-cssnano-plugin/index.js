@@ -29,7 +29,7 @@ OptimizeCssnanoPlugin.prototype.apply = function(compiler) {
       // Search for CSS assets
       const assetsNames = Object.keys(compilation.assets)
         .filter((assetName) => {
-          return /\.css$/i.test(assetName);
+          return /\.css(\?.*)?$/i.test(assetName);
         });
 
       let hasErrors = false;
@@ -49,7 +49,7 @@ OptimizeCssnanoPlugin.prototype.apply = function(compiler) {
         const cssnanoOptions = self.options.cssnanoOptions;
 
         // Extract or remove previous map
-        const mapName = assetName + '.map';
+        const mapName = assetName.replace(/\.css/, '.css.map')
         if (self.options.sourceMap) {
           // Use previous map if exist...
           if (compilation.assets[mapName]) {
