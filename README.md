@@ -1,24 +1,9 @@
 # webpack-bundle-hash-query
 
-## Project setup
-```
-yarn install
-```
+demo for [issue](https://github.com/vuejs/vue-cli/issues/5989)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+support `<script src="/js/chunk-vendors.js?_hash=0d01e0b2c53c417bdcfd"></script>`
 
-### Compiles and minifies for production
-```
-yarn build
-```
+since `@intervolga/optimize-cssnano-plugin` can't handle assets with query, I modified it. [related issue](https://github.com/intervolga/optimize-cssnano-plugin/issues/8)
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+If out css/css map assets contains query,`@intervolga/optimize-cssnano-plugin` will **always emit css map** even we set `css.sourceMap: false` in vue.config.js. Secondly, it **won't minify** the emit css assets.
