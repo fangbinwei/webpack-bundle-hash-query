@@ -17,7 +17,6 @@ module.exports = {
     // Modify the preload config for single page
     // if your app is [multi-page](https://cli.vuejs.org/config/#pages), this preload config is invalid, we may need more complex config
     config.plugin('preload').tap(args => {
-      console.log(args)
       // CLI configure fileBlackList as  [/\.map$/, /hot-update\.js$/]
       // sine we append hash to .map, so we also need filter it
       args[0].fileBlacklist.push(/\.map\?/)
