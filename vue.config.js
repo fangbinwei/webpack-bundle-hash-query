@@ -11,8 +11,6 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
-    // replace @intervolga/optimize-cssnano-plugin which set by CLI with my own modified version
-    config.plugin('optimize-css').set('plugin', require('./@fangbinwei/optimize-cssnano-plugin'))
     // Assuming your application is a single page
     // Modify the preload config for single page
     // if your app is [multi-page](https://cli.vuejs.org/config/#pages), this preload config is invalid, we may need more complex config
@@ -27,6 +25,20 @@ module.exports = {
         .output
         .filename('js/[name].js?_hash=[contenthash:8]')
         .chunkFilename('js/[name].js?_hash=[contenthash:8]')
+
+      // replace @intervolga/optimize-cssnano-plugin which set by CLI with my own modified version
+      config.plugin('optimize-css').set('plugin', require('./@fangbinwei/optimize-cssnano-plugin'))
+      // or use css-minimizer-webpack-plugin, it's better
+      // config
+      //   .plugin('optimize-css')
+      //   .set('plugin', require('css-minimizer-webpack-plugin'))
+      //   .tap(args => {
+      //     const newArgs = [{
+      //       sourceMap: args[0].sourceMap,
+      //       minimizerOptions: args[0].cssnanoOptions
+      //     }]
+      //     return newArgs
+      //   })
     }
   },
 }
